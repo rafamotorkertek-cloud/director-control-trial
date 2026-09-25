@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Director Control — Multazam Development</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- LOGIN -->
+  <section id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <div class="login-logo">MA</div>
+      <p class="eyebrow">MULTAZAM DEVELOPMENT</p>
+      <h1>DIRECTOR <span>CONTROL</span></h1>
+      <p class="muted">Sistem Monitoring Manager Harian</p>
+
+      <form id="loginForm" class="login-form">
+        <div class="field">
+          <label>Username</label>
+          <input id="loginUsername" autocomplete="username" required placeholder="Masukkan username">
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Masukkan password">
+        </div>
+        <button class="primary login-button" type="submit">Login</button>
+        <p id="loginError" class="login-error hidden">Username atau password salah.</p>
+      </form>
+
+      <div class="demo-box">
+        <strong>Akun demo</strong>
+        <div>Direktur: <code>direktur</code> / <code>123456</code></div>
+        <div>Manager: <code>manager</code> / <code>123456</code></div>
+        <div>Leader: <code>leader</code> / <code>123456</code></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATION -->
+  <div id="app" class="hidden">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">MA</div>
+        <div>
+          <strong>Multazam</strong>
+          <small>Development</small>
+        </div>
+      </div>
+      <div class="top-actions">
+        <span id="currentDate"></span>
+        <button class="icon-btn" title="Notifikasi">🔔</button>
+        <span id="currentUser" class="role"></span>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">DIRECTOR CONTROL</p>
+          <h1>Today Control</h1>
+          <p id="welcomeText" class="muted"></p>
+        </div>
+        <button class="primary" onclick="refreshDashboard()">↻ Refresh</button>
+      </section>
+
+      <section class="stats" id="stats"></section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Daftar Unit</h2>
+            <p class="muted">Klik unit untuk melihat detail.</p>
+          </div>
+          <input id="searchUnit" class="search" placeholder="Cari unit..." oninput="renderUnits()">
+        </div>
+        <div id="unitTable" class="table-wrap"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Alert & Follow Up</h2>
+            <p class="muted">Pekerjaan yang membutuhkan perhatian.</p>
+          </div>
+        </div>
+        <div id="alerts"></div>
+      </section>
+
+      <section class="panel hidden" id="detailPanel">
+        <div class="panel-head">
+          <div>
+            <button class="back" onclick="closeDetail()">← Kembali</button>
+            <h2 id="detailTitle"></h2>
+            <p id="detailManager" class="muted"></p>
+          </div>
+          <div id="detailProgress" class="progress-ring"></div>
+        </div>
+
+        <div class="tabs">
+          <button class="tab active" data-tab="overview" onclick="showTab('overview')">Overview</button>
+          <button class="tab" data-tab="checklist" onclick="showTab('checklist')">Checklist</button>
+          <button class="tab" data-tab="issue" onclick="showTab('issue')">Kendala</button>
+          <button class="tab" data-tab="closing" onclick="showTab('closing')">Closing Report</button>
+          <button class="tab" data-tab="kpi" onclick="showTab('kpi')">KPI</button>
+        </div>
+
+        <div id="tab-overview" class="tab-content"></div>
+        <div id="tab-checklist" class="tab-content hidden"></div>
+        <div id="tab-issue" class="tab-content hidden"></div>
+        <div id="tab-closing" class="tab-content hidden"></div>
+        <div id="tab-kpi" class="tab-content hidden"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
