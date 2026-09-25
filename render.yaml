@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: director-control-trial
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: APP_TIMEZONE
+        value: Asia/Jakarta
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DB_PATH
+        value: ./data/director-control.db
+      - key: UPLOAD_DIR
+        value: ./uploads
