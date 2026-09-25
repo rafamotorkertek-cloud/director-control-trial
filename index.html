@@ -1,120 +1,73 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Director Control — Multazam Development</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0d12">
+<title>Director Control — Multazam Development</title>
+<style>
+:root{--bg:#f4f6f8;--card:#fff;--ink:#16181d;--muted:#6b7280;--line:#e5e7eb;--dark:#0b0d12;--red:#c51624;--red2:#ef3340;--green:#16834b;--yellow:#a36a00;--shadow:0 10px 30px rgba(15,23,42,.07);--radius:18px}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--ink);background:var(--bg)}button,input{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+.login-screen{min-height:100vh;display:grid;place-items:center;padding:22px;background:radial-gradient(circle at 10% 10%,#3a0d12 0,#0b0d12 42%,#050608 100%)}
+.login-card{width:min(430px,100%);background:#fff;border-radius:24px;padding:30px;box-shadow:0 24px 70px rgba(0,0,0,.3)}.login-logo,.brand-mark{display:grid;place-items:center;background:linear-gradient(135deg,#111,#c51624);color:#fff;font-weight:900;border-radius:12px}.login-logo{width:58px;height:58px;font-size:20px;margin-bottom:18px}.eyebrow{font-size:11px;letter-spacing:.18em;font-weight:800;color:var(--red);margin:0 0 7px}.login-card h1{font-size:34px;line-height:1;margin:0 0 10px}.login-card h1 span{color:var(--red)}.muted{color:var(--muted)}.login-form{margin-top:24px}.field{margin:14px 0}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:7px}.field input,.search{width:100%;border:1px solid #d8dce2;border-radius:12px;padding:12px 13px;outline:none;background:#fff}.field input:focus,.search:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(197,22,36,.1)}.primary{border:0;border-radius:12px;background:var(--red);color:#fff;padding:11px 16px;font-weight:800;box-shadow:0 6px 16px rgba(197,22,36,.2)}.primary:hover{background:#a9101d}.login-button{width:100%;margin-top:7px}.login-error{color:#b42318;font-size:13px;font-weight:700}.demo-box{margin-top:22px;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fafafa;font-size:13px;line-height:1.8}.demo-box code{background:#eee;padding:2px 5px;border-radius:5px}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(11,13,18,.96);color:#fff;border-bottom:1px solid #272a31;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:15px}.brand{display:flex;align-items:center;gap:10px}.brand-mark{width:42px;height:42px;border-radius:10px}.brand strong{display:block;font-size:15px}.brand small{display:block;color:#a8adb7;font-size:11px}.top-actions{display:flex;align-items:center;gap:12px;font-size:12px}.role{background:#242832;padding:7px 10px;border-radius:999px;font-weight:700}.icon-btn,.logout-btn{border:1px solid #3a3f48;background:#171a20;color:#fff;border-radius:10px;padding:8px 10px}.container{max-width:1200px;margin:auto;padding:26px 18px 60px}.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:20px}.hero h1{margin:0;font-size:34px}.hero p{margin:5px 0}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}.stat .label{font-size:12px;color:var(--muted);font-weight:700}.stat .value{font-size:27px;font-weight:900;margin-top:6px}.stat .sub{font-size:11px;color:var(--muted);margin-top:4px}.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);margin-bottom:18px}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:16px}.panel h2{font-size:18px;margin:0 0 4px}.search{max-width:240px}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:13px 10px;border-bottom:1px solid var(--line);text-align:left;font-size:13px}.table th{font-size:11px;text-transform:uppercase;color:var(--muted);letter-spacing:.06em}.unit-name{font-weight:800}.badge{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:999px;font-size:11px;font-weight:800}.good{background:#e8f7ef;color:var(--green)}.warn{background:#fff4d8;color:var(--yellow)}.bad{background:#fde9eb;color:#b42318}.neutral{background:#eef1f4;color:#596170}.bar{height:8px;background:#edf0f3;border-radius:99px;overflow:hidden}.bar>span{display:block;height:100%;background:var(--red);border-radius:99px}.alert{display:flex;align-items:flex-start;gap:12px;padding:13px;border:1px solid var(--line);border-radius:12px;margin:9px 0}.alert strong{display:block;font-size:13px}.alert small{display:block;color:var(--muted);margin-top:3px}.alert .dot{width:9px;height:9px;border-radius:50%;background:var(--red);margin-top:5px;flex:none}.unit-link{border:0;background:none;color:var(--ink);font-weight:800;padding:0;text-align:left}.unit-link:hover{color:var(--red)}.back{border:0;background:#f1f3f5;border-radius:10px;padding:8px 11px;margin-bottom:12px}.tabs{display:flex;gap:8px;overflow:auto;border-bottom:1px solid var(--line);margin:0 -20px;padding:0 20px}.tab{border:0;background:none;padding:12px 10px;font-weight:800;color:var(--muted);white-space:nowrap}.tab.active{color:var(--red);border-bottom:2px solid var(--red)}.tab-content{padding-top:18px}.mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.mini{padding:15px;border:1px solid var(--line);border-radius:13px}.mini b{display:block;font-size:20px;margin-top:4px}.check{display:flex;justify-content:space-between;align-items:center;padding:12px;border-bottom:1px solid var(--line)}.progress-ring{font-weight:900;color:var(--red);font-size:22px}.footer-note{text-align:center;color:#8b919c;font-size:11px;margin-top:28px}
+@media(max-width:800px){.stats{grid-template-columns:repeat(2,1fr)}.hero{align-items:flex-start;flex-direction:column}.top-actions #currentDate{display:none}.table th:nth-child(3),.table td:nth-child(3){display:none}.mini-grid{grid-template-columns:1fr 1fr}.container{padding:20px 12px 50px}.panel{padding:15px}.tabs{margin:0 -15px;padding:0 15px}}
+@media(max-width:480px){.stats{grid-template-columns:1fr 1fr;gap:9px}.stat{padding:13px}.stat .value{font-size:21px}.hero h1{font-size:28px}.panel-head{align-items:flex-start;flex-direction:column}.search{max-width:none}.table th:nth-child(4),.table td:nth-child(4){display:none}.mini-grid{grid-template-columns:1fr}.login-card{padding:23px}}
+</style>
 </head>
 <body>
-  <!-- LOGIN -->
-  <section id="loginScreen" class="login-screen">
-    <div class="login-card">
-      <div class="login-logo">MA</div>
-      <p class="eyebrow">MULTAZAM DEVELOPMENT</p>
-      <h1>DIRECTOR <span>CONTROL</span></h1>
-      <p class="muted">Sistem Monitoring Manager Harian</p>
-
-      <form id="loginForm" class="login-form">
-        <div class="field">
-          <label>Username</label>
-          <input id="loginUsername" autocomplete="username" required placeholder="Masukkan username">
-        </div>
-        <div class="field">
-          <label>Password</label>
-          <input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Masukkan password">
-        </div>
-        <button class="primary login-button" type="submit">Login</button>
-        <p id="loginError" class="login-error hidden">Username atau password salah.</p>
-      </form>
-
-      <div class="demo-box">
-        <strong>Akun demo</strong>
-        <div>Direktur: <code>direktur</code> / <code>123456</code></div>
-        <div>Manager: <code>manager</code> / <code>123456</code></div>
-        <div>Leader: <code>leader</code> / <code>123456</code></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- APPLICATION -->
-  <div id="app" class="hidden">
-    <header class="topbar">
-      <div class="brand">
-        <div class="brand-mark">MA</div>
-        <div>
-          <strong>Multazam</strong>
-          <small>Development</small>
-        </div>
-      </div>
-      <div class="top-actions">
-        <span id="currentDate"></span>
-        <button class="icon-btn" title="Notifikasi">🔔</button>
-        <span id="currentUser" class="role"></span>
-        <button class="logout-btn" onclick="logout()">Logout</button>
-      </div>
-    </header>
-
-    <main class="container">
-      <section class="hero">
-        <div>
-          <p class="eyebrow">DIRECTOR CONTROL</p>
-          <h1>Today Control</h1>
-          <p id="welcomeText" class="muted"></p>
-        </div>
-        <button class="primary" onclick="refreshDashboard()">↻ Refresh</button>
-      </section>
-
-      <section class="stats" id="stats"></section>
-
-      <section class="panel">
-        <div class="panel-head">
-          <div>
-            <h2>Daftar Unit</h2>
-            <p class="muted">Klik unit untuk melihat detail.</p>
-          </div>
-          <input id="searchUnit" class="search" placeholder="Cari unit..." oninput="renderUnits()">
-        </div>
-        <div id="unitTable" class="table-wrap"></div>
-      </section>
-
-      <section class="panel">
-        <div class="panel-head">
-          <div>
-            <h2>Alert & Follow Up</h2>
-            <p class="muted">Pekerjaan yang membutuhkan perhatian.</p>
-          </div>
-        </div>
-        <div id="alerts"></div>
-      </section>
-
-      <section class="panel hidden" id="detailPanel">
-        <div class="panel-head">
-          <div>
-            <button class="back" onclick="closeDetail()">← Kembali</button>
-            <h2 id="detailTitle"></h2>
-            <p id="detailManager" class="muted"></p>
-          </div>
-          <div id="detailProgress" class="progress-ring"></div>
-        </div>
-
-        <div class="tabs">
-          <button class="tab active" data-tab="overview" onclick="showTab('overview')">Overview</button>
-          <button class="tab" data-tab="checklist" onclick="showTab('checklist')">Checklist</button>
-          <button class="tab" data-tab="issue" onclick="showTab('issue')">Kendala</button>
-          <button class="tab" data-tab="closing" onclick="showTab('closing')">Closing Report</button>
-          <button class="tab" data-tab="kpi" onclick="showTab('kpi')">KPI</button>
-        </div>
-
-        <div id="tab-overview" class="tab-content"></div>
-        <div id="tab-checklist" class="tab-content hidden"></div>
-        <div id="tab-issue" class="tab-content hidden"></div>
-        <div id="tab-closing" class="tab-content hidden"></div>
-        <div id="tab-kpi" class="tab-content hidden"></div>
-      </section>
-    </main>
-  </div>
-
-  <script src="app.js"></script>
-</body>
-</html>
+<section id="loginScreen" class="login-screen">
+ <div class="login-card">
+  <div class="login-logo">MA</div><p class="eyebrow">MULTAZAM DEVELOPMENT</p><h1>DIRECTOR <span>CONTROL</span></h1><p class="muted">Sistem Monitoring Manager Harian</p>
+  <form id="loginForm" class="login-form">
+   <div class="field"><label>Username</label><input id="loginUsername" required placeholder="Masukkan username"></div>
+   <div class="field"><label>Password</label><input id="loginPassword" type="password" required placeholder="Masukkan password"></div>
+   <button class="primary login-button">Login</button><p id="loginError" class="login-error hidden">Username atau password salah.</p>
+  </form>
+  <div class="demo-box"><strong>Akun demo</strong><br>Direktur: <code>direktur</code> / <code>123456</code><br>Manager: <code>manager</code> / <code>123456</code><br>Leader: <code>leader</code> / <code>123456</code></div>
+ </div>
+</section>
+<div id="app" class="hidden">
+<header class="topbar"><div class="brand"><div class="brand-mark">MA</div><div><strong>Multazam Development</strong><small>Director Control</small></div></div><div class="top-actions"><span id="currentDate"></span><button class="icon-btn">🔔 <span id="notifCount">3</span></button><span id="currentUser" class="role"></span><button class="logout-btn" onclick="logout()">Logout</button></div></header>
+<main class="container">
+<section class="hero"><div><p class="eyebrow">EXECUTIVE MONITORING</p><h1>Today Control</h1><p id="welcomeText" class="muted"></p></div><button class="primary" onclick="renderDashboard()">↻ Refresh</button></section>
+<section id="stats" class="stats"></section>
+<section class="panel"><div class="panel-head"><div><h2>Daftar Unit</h2><p class="muted">Pantau kondisi setiap unit dari satu layar.</p></div><input id="searchUnit" class="search" placeholder="Cari unit..." oninput="renderUnits()"></div><div id="unitTable"></div></section>
+<section class="panel"><div class="panel-head"><div><h2>⚠️ Alert & Follow Up</h2><p class="muted">Prioritas yang membutuhkan perhatian Direktur.</p></div></div><div id="alerts"></div></section>
+<section id="detailPanel" class="panel hidden"><button class="back" onclick="closeDetail()">← Kembali ke Dashboard</button><div class="panel-head"><div><p class="eyebrow">UNIT DETAIL</p><h2 id="detailTitle"></h2><p id="detailManager" class="muted"></p></div><div id="detailProgress" class="progress-ring"></div></div>
+<div class="tabs"><button class="tab active" data-tab="overview" onclick="showTab('overview')">Overview</button><button class="tab" data-tab="checklist" onclick="showTab('checklist')">Checklist</button><button class="tab" data-tab="issue" onclick="showTab('issue')">Kendala</button><button class="tab" data-tab="closing" onclick="showTab('closing')">Closing Report</button><button class="tab" data-tab="kpi" onclick="showTab('kpi')">KPI</button></div>
+<div id="tab-overview" class="tab-content"></div><div id="tab-checklist" class="tab-content hidden"></div><div id="tab-issue" class="tab-content hidden"></div><div id="tab-closing" class="tab-content hidden"></div><div id="tab-kpi" class="tab-content hidden"></div></section>
+<p class="footer-note">Director Control • Multazam Development • Online Trial</p>
+</main></div>
+<script>
+const users={direktur:{pass:'123456',role:'Direktur'},manager:{pass:'123456',role:'Manager'},leader:{pass:'123456',role:'Leader'}};
+const units=[
+ {name:'Resto The Heaven',manager:'Manager Resto',omzet:82,target:100,kpi:91,sop:96,issue:'Gas / engineering follow-up',closing:'Sudah',status:'warn'},
+ {name:'Glamping The Heaven',manager:'Manager Glamping',omzet:104,target:100,kpi:94,sop:98,issue:'Tidak ada kendala kritis',closing:'Sudah',status:'good'},
+ {name:'Kahyangan',manager:'Manager Kahyangan',omzet:76,target:100,kpi:83,sop:89,issue:'Follow-up target omzet',closing:'Belum',status:'bad'},
+ {name:'Central Kitchen Jogja',manager:'Kepala CK',omzet:93,target:100,kpi:88,sop:92,issue:'Stock opname perlu finalisasi',closing:'Sudah',status:'warn'},
+ {name:'Central Kitchen Wonosobo',manager:'Kepala CK',omzet:68,target:100,kpi:79,sop:85,issue:'HPP perlu dikontrol',closing:'Belum',status:'bad'},
+ {name:'Distro Helm',manager:'Manager Distro',omzet:97,target:100,kpi:92,sop:95,issue:'Tidak ada kendala kritis',closing:'Sudah',status:'good'}
+];
+let currentUser=null, selected=null;
+const rupiah=n=>'Rp '+(n*100000).toLocaleString('id-ID');
+function today(){return new Date().toLocaleDateString('id-ID',{weekday:'long',day:'2-digit',month:'long',year:'numeric'})}
+function login(e){e.preventDefault();const u=loginUsername.value.trim(),p=loginPassword.value;if(users[u]&&users[u].pass===p){currentUser={username:u,...users[u]};localStorage.setItem('dc_user',JSON.stringify(currentUser));startApp()}else loginError.classList.remove('hidden')}
+function startApp(){loginScreen.classList.add('hidden');app.classList.remove('hidden');currentDate.textContent=today();currentUserEl();renderDashboard()}
+function currentUserEl(){document.getElementById('currentUser').textContent=currentUser.role+' • '+currentUser.username;welcomeText.textContent='Selamat datang. Fokus hari ini: omzet, profit, cash, SOP, SDM, dan follow-up kendala.'}
+function renderDashboard(){renderStats();renderUnits();renderAlerts()}
+function renderStats(){const avg=k=>Math.round(units.reduce((a,b)=>a+b[k],0)/units.length);const omzet=avg('omzet');stats.innerHTML=`<div class="stat"><div class="label">OMZET HARI INI</div><div class="value">${rupiah(omzet)}</div><div class="sub">Achievement rata-rata ${omzet}%</div></div><div class="stat"><div class="label">KPI MANAGER</div><div class="value">${avg('kpi')}%</div><div class="sub">Performance score</div></div><div class="stat"><div class="label">SOP COMPLIANCE</div><div class="value">${avg('sop')}%</div><div class="sub">Audit operasional</div></div><div class="stat"><div class="label">ACTION OPEN</div><div class="value">4</div><div class="sub">2 overdue • 2 waiting</div></div>`}
+function statusBadge(u){const cls=u.status==='good'?'good':u.status==='warn'?'warn':'bad';const txt=u.status==='good'?'AMAN':u.status==='warn'?'PERHATIAN':'PRIORITAS';return `<span class="badge ${cls}">${txt}</span>`}
+function renderUnits(){const q=(searchUnit.value||'').toLowerCase();const arr=units.filter(u=>u.name.toLowerCase().includes(q));unitTable.innerHTML=`<div style="overflow:auto"><table class="table"><thead><tr><th>Unit</th><th>Status</th><th>Omzet</th><th>KPI</th><th>SOP</th><th>Closing</th></tr></thead><tbody>${arr.map((u,i)=>`<tr><td><button class="unit-link" onclick="openDetail(${units.indexOf(u)})">${u.name}</button><div class="muted" style="font-size:11px;margin-top:3px">${u.manager}</div></td><td>${statusBadge(u)}</td><td><b>${u.omzet}%</b><div class="bar"><span style="width:${Math.min(u.omzet,100)}%"></span></div></td><td>${u.kpi}%</td><td>${u.sop}%</td><td>${u.closing==='Sudah'?'<span class="badge good">✓ Sudah</span>':'<span class="badge bad">! Belum</span>'}</td></tr>`).join('')}</tbody></table></div>`}
+function renderAlerts(){const alerts=units.filter(u=>u.status!=='good').map(u=>`<div class="alert"><span class="dot"></span><div><strong>${u.name} — ${u.omzet<70?'Omzet di bawah 70%':'Perlu perhatian'}</strong><small>${u.issue} • Closing: ${u.closing}</small></div><button class="back" style="margin-left:auto" onclick="openDetail(${units.indexOf(u)})">Buka</button></div>`).join('');document.getElementById('alerts').innerHTML=alerts||'<div class="alert"><div><strong>Tidak ada alert.</strong></div></div>'}
+function openDetail(i){selected=units[i];detailPanel.classList.remove('hidden');detailTitle.textContent=selected.name;detailManager.textContent=selected.manager+' • Status '+(selected.status==='good'?'AMAN':selected.status==='warn'?'PERHATIAN':'PRIORITAS');detailProgress.textContent=selected.kpi+'% KPI';showTab('overview');detailPanel.scrollIntoView({behavior:'smooth',block:'start'})}
+function closeDetail(){detailPanel.classList.add('hidden');selected=null;window.scrollTo({top:0,behavior:'smooth'})}
+function showTab(tab){document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));document.querySelectorAll('.tab-content').forEach(x=>x.classList.add('hidden'));document.getElementById('tab-'+tab).classList.remove('hidden');if(!selected)return;const checklist=['Morning Report','Cek SDM','Cek Stok','Cek Kebersihan','Kontrol SOP','Closing Report'];if(tab==='overview')document.getElementById('tab-overview').innerHTML=`<div class="mini-grid"><div class="mini">Omzet Achievement<b>${selected.omzet}%</b></div><div class="mini">KPI Manager<b>${selected.kpi}%</b></div><div class="mini">SOP Compliance<b>${selected.sop}%</b></div><div class="mini">Target Omzet<b>${rupiah(selected.target)}</b></div><div class="mini">Status Closing<b>${selected.closing}</b></div><div class="mini">Alert<b>${selected.status==='good'?'Tidak ada':'Perlu follow-up'}</b></div></div>`;
+if(tab==='checklist')document.getElementById('tab-checklist').innerHTML=checklist.map((x,i)=>`<div class="check"><span>${x}</span><span class="badge ${i<5?'good':'warn'}">${i<5?'✓ Selesai':'Menunggu'}</span></div>`).join('');
+if(tab==='issue')document.getElementById('tab-issue').innerHTML=`<div class="alert"><span class="dot"></span><div><strong>${selected.issue}</strong><small>Source: Monitoring harian • PIC: ${selected.manager}</small></div></div>`;
+if(tab==='closing')document.getElementById('tab-closing').innerHTML=`<div class="mini-grid"><div class="mini">Status<b>${selected.closing}</b></div><div class="mini">Report<b>${selected.closing==='Sudah'?'Lengkap':'Belum masuk'}</b></div><div class="mini">Evidence<b>${selected.closing==='Sudah'?'Ada':'Belum'}</b></div></div>`;
+if(tab==='kpi')document.getElementById('tab-kpi').innerHTML=`<div class="mini-grid"><div class="mini">Checklist 20%<b>${selected.kpi}%</b></div><div class="mini">Report 15%<b>${Math.min(100,selected.kpi+2)}%</b></div><div class="mini">Follow-up 15%<b>${Math.max(0,selected.kpi-4)}%</b></div><div class="mini">Evidence 15%<b>${selected.sop}%</b></div><div class="mini">SOP 15%<b>${selected.sop}%</b></div><div class="mini">Omzet 10%<b>${selected.omzet}%</b></div></div>`}
+function logout(){localStorage.removeItem('dc_user');location.reload()}
+loginForm.addEventListener('submit',login);const saved=localStorage.getItem('dc_user');if(saved){currentUser=JSON.parse(saved);startApp()}
+</script>
+</body></html>
